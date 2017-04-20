@@ -1,0 +1,45 @@
+body {
+    width: 400px;
+    margin: 0px;
+    min-width: 357px;
+    overflow-x: hidden;
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Kaku Gothic Pro", "Lucida Grande", Verdana, Arial, Meiryo, "メイリオ", sans-serif;
+}
+
+.panel {
+    margin: 0;
+    background-image: url("../images/background_sky.jpg");
+}
+
+.panel-body {
+    height: 400px;
+    overflow: auto;
+}
+
+.chatBox {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.chatBalloon {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    background-color: white;
+}
+
+.bot {
+    float: left;
+    display: inline-block;
+}
+
+.usr {
+    float: right;
+    background-color: Lime;
+}
+
+.inputText {
+    text-align: right;
+}
