@@ -1,3 +1,7 @@
+var recognizing;
+var recognition = new webkitSpeechRecognition();
+recognition.continuous = true;
+
 function getBotSpeech() {
     var inputText = $('#txt').val();
     var messageMine = $("<div class='chatBox'><div class='usr chatBalloon'>" + esc(inputText) + "</div></div>");
@@ -19,6 +23,23 @@ function esc(s) {
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
 }
 
+
+function reset() {
+    recognizing = false;
+    $('.rec-btn').text("Click to Speak");
+}
+
+function toggleStartStop() {
+    if (recognizing) {
+        recognition.stop();
+        reset();
+    } else {
+        recognition.start();
+        recognizing = true;
+        $('.rec-btn').text("Click to Stop");
+    }
+}
+
 function clickHandler(e) {
     getBotSpeech();
 }
@@ -31,4 +52,17 @@ function textareaHandler(e) {
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.chat-btn').addEventListener('click', clickHandler);
     document.querySelector('#txt').addEventListener('keyup', textareaHandler);
+    document.querySelector('.rec-btn').addEventListener('click', toggleStartStop);
+    recognition.addEventListener('result', function(event){
+        for (var i = resultIndex; i < event.results.length; ++i) {
+            if (event.results.final) {
+                $('.txt').value += event.results[i][0].transcript;
+            }
+        }
+        reset();
+    });
+});
+
+$(function(){
+    reset();
 });
